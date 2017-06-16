@@ -17,6 +17,8 @@ function loop() {
     else if(creep.memory.role === 'builder') builderRole.run(creep)
     else if(creep.memory.role === 'repairer') repairerRole.run(creep)
   }
+
+  utilities.printCpuUsage()
 }
 
 module.exports = {loop}

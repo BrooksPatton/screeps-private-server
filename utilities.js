@@ -19,8 +19,22 @@ function clearOutDeadCreeps() {
   }
 }
 
+function printCpuUsage() {
+  const cpuUsed = Game.cpu.getUsed()
+  const cpuLimit = Game.cpu.limit
+  const cpuBucket = Game.cpu.bucket
+
+  if(cpuUsed > cpuLimit) {
+    console.log(`
+      Current CPU usage: ${cpuUsed}
+      Bucket amount left: ${cpuBucket}
+    `)
+  }
+}
+
 module.exports = {
   toggleWorking,
   harvest,
-  clearOutDeadCreeps
+  clearOutDeadCreeps,
+  printCpuUsage
 }
