@@ -35,7 +35,13 @@ function spawnCreep(spawn, role) {
 
   if(typeof result === 'string') {
     console.log(`${spawn.name} just created ${result} with the role ${role}`)
-    console.log(`Harvesters: ${numHarvesters}, Upgraders: ${numUpgraders}, Builders: ${numBuilders}, Repairer: ${numRepairers}`)
+    console.log(`
+        Harvesters: ${numHarvesters}
+        Upgraders: ${numUpgraders}
+        Builders: ${numBuilders}
+        Repairer: ${numRepairers}
+        Refiller: ${numRefillers}
+    `)
   }
 }
 

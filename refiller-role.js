@@ -9,7 +9,9 @@ function run(creep) {
 }
 
 function deployEnergy(creep) {
-  const target = creep.pos.findClosestByPath(FIND_MY_STRUCTURES, {filter: s => (s.structureType === STRUCTURE_TOWER || s.structureType === STRUCTURE_STORAGE) && s.energy < s.energyCapacity})
+  let targets = creep.room.find(FIND_MY_STRUCTURES, {filter: s => s.structureType === STRUCTURE_CONTAINER || s.structureType === STRUCTURE_STORAGE})
+  targets = _.filter(targets, s => s.store.energy < s.storeCapacity)
+  const target = targets[0]
   
   if(target) {
     const result = creep.transfer(target, RESOURCE_ENERGY)
