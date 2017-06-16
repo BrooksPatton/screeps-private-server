@@ -1,27 +1,17 @@
-function run(creep) {
-  toggleWorking(creep)
+const utilities = require('./utilities')
 
-  if(!creep.memory.working) harvest(creep)
+function run(creep) {
+  utilities.toggleWorking(creep)
+
+  if(!creep.memory.working) utilities.harvest(creep)
   else deployEnergy(creep)
 }
 
-function toggleWorking(creep){
-  if(!creep.memory.working && creep.carry.energy === creep.carryCapacity) creep.memory.working = true
-  else if(creep.memory.working && creep.carry.energy === 0) creep.memory.working = false
-}
-
-function harvest(creep) {
-  const source = creep.pos.findClosestByPath(FIND_SOURCES)
-  const result = creep.harvest(source)
-
-  if(result === ERR_NOT_IN_RANGE) creep.moveTo(source)
-}
-
 function deployEnergy(creep) {
-  const spawn = creep.pos.findClosestByPath(FIND_MY_SPAWNS)
-  const result = creep.transfer(spawn, RESOURCE_ENERGY)
+  const target = creep.pos.findClosestByPath(FIND_MY_STRUCTURES, {filter: s => (s.structureType === 'spawn' || s.structureType === 'extension') && s.energy < s.energyCapacity})
+  const result = creep.transfer(target, RESOURCE_ENERGY)
 
-  if(result === ERR_NOT_IN_RANGE) creep.moveTo(spawn)
+  if(result === ERR_NOT_IN_RANGE) creep.moveTo(target)
 }
 
 module.exports = {run}
