@@ -4,7 +4,7 @@ function toggleWorking(creep){
 }
 
 function harvest(creep) {
-  const source = creep.pos.findClosestByPath(FIND_SOURCES)
+  const source = creep.pos.findClosestByPath(FIND_SOURCES, {filter: s => s.energy > 0})
   const result = creep.harvest(source)
 
   if(result === ERR_NOT_IN_RANGE) creep.moveTo(source)
@@ -21,7 +21,7 @@ function clearOutDeadCreeps() {
 
 function printCpuUsage() {
   const cpuUsed = Game.cpu.getUsed()
-  const cpuLimit = 10
+  const cpuLimit = Game.cpu.limit
   const cpuBucket = Game.cpu.bucket
 
   if(cpuUsed > cpuLimit) {

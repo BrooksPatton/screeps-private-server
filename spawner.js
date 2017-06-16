@@ -1,17 +1,20 @@
-const minNumOfHarvesters = 2
+const minNumOfHarvesters = 4
 const minNumOfUpgraders = 1
 const minNumOfBuilders = 1
 const minNumOfRepairers = 1
+const minNumOfRefillers = 1
 let numHarvesters
 let numUpgraders
 let numBuilders
 let numRepairers
+let numRefillers
 
 function run() {
   numHarvesters = _.sum(Game.creeps, c => c.memory.role === 'harvester')
   numUpgraders = _.sum(Game.creeps, c => c.memory.role === 'upgrader')
   numBuilders = _.sum(Game.creeps, c => c.memory.role === 'builder')
   numRepairers = _.sum(Game.creeps, c => c.memory.role === 'repairer')
+  numRefillers = _.sum(Game.creeps, c => c.memory.role === 'refiller')
 
   for(let name in Game.spawns) {
     const spawn = Game.spawns[name]
@@ -20,7 +23,8 @@ function run() {
     else if(numUpgraders < minNumOfUpgraders) spawnCreep(spawn, 'upgrader')
     else if(numBuilders < minNumOfBuilders) spawnCreep(spawn, 'builder')
     else if(numRepairers < minNumOfRepairers) spawnCreep(spawn, 'repairer')
-    else spawnCreep(spawn, 'builder')
+    else if(numRefillers < minNumOfRefillers) spawnCreep(spawn, 'refiller')
+    else spawnCreep(spawn, 'refiller')
   }
 }
 
