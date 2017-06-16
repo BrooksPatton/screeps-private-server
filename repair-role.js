@@ -18,7 +18,7 @@ function run(creep) {
 }
 
 function repair(creep) {
-  const site = creep.pos.findClosestByPath(FIND_STRUCTURES, {filter: s => s.hits < s.maxHits})
+  const site = creep.pos.findClosestByPath(FIND_STRUCTURES, {filter: s => s.hits < s.hitsMax})
     
   if(site) {
     const result = creep.repair(site)

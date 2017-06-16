@@ -21,7 +21,7 @@ function clearOutDeadCreeps() {
 
 function printCpuUsage() {
   const cpuUsed = Game.cpu.getUsed()
-  const cpuLimit = Game.cpu.limit
+  const cpuLimit = 10
   const cpuBucket = Game.cpu.bucket
 
   if(cpuUsed > cpuLimit) {
